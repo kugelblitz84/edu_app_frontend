@@ -11,6 +11,7 @@ import {
   FileText,
   BookOpen,
   CheckCircle2,
+  Check,
   GraduationCap,
   FileSpreadsheet,
   ArrowRight,
@@ -493,7 +494,7 @@ interface AccessPolicyBadgeProps {
 function AccessPolicyBadge({ item, darkBg = false }: AccessPolicyBadgeProps) {
   if (item.accessPolicy === 'FREE') {
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
         FREE
       </span>
     );
@@ -502,13 +503,13 @@ function AccessPolicyBadge({ item, darkBg = false }: AccessPolicyBadgeProps) {
     const amount = item.priceAmountMinor ? `৳${item.priceAmountMinor / 100}` : 'PIN';
     return (
       <span
-        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase ${
+        className={`inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase ${
           darkBg
             ? 'bg-amber-400/20 text-amber-200 border border-amber-300/30'
             : 'bg-purple-100 text-purple-800 border border-purple-300'
         }`}
       >
-        <Lock className="w-2.5 h-2.5" />
+        <Lock className="w-2.5 h-2.5 2xl:w-3 2xl:h-3" />
         {amount} • PIN
       </span>
     );
@@ -516,7 +517,7 @@ function AccessPolicyBadge({ item, darkBg = false }: AccessPolicyBadgeProps) {
   if (item.accessPolicy === 'ENROLLED') {
     return (
       <span
-        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase ${
+        className={`inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase ${
           darkBg
             ? 'bg-sky-400/20 text-sky-200 border border-sky-300/30'
             : 'bg-indigo-100 text-indigo-800 border border-indigo-200'
@@ -565,14 +566,14 @@ function NotchedSectionContainer({
   children
 }: NotchedSectionContainerProps) {
   return (
-    <div className={`relative rounded-[22px] ${bgClass} shadow-sm transition-all duration-300 h-full flex flex-col justify-between`}>
+    <div className={`relative rounded-[22px] 2xl:rounded-[26px] ${bgClass} shadow-sm transition-all duration-300 h-full flex flex-col justify-between`}>
       {/* Top-Right Recessed Notch Cutout */}
       <div
-        className={`absolute top-0 right-0 ${pageBgMatch} pl-2.5 pb-2.5 rounded-bl-[18px] z-20 flex items-start justify-end`}
+        className={`absolute top-0 right-0 ${pageBgMatch} pl-2.5 pb-2.5 2xl:pl-3.5 2xl:pb-3.5 rounded-bl-[18px] 2xl:rounded-bl-[22px] z-20 flex items-start justify-end`}
       >
         {/* Top-left inverted fillet curve */}
         <svg
-          className="absolute -left-[18px] top-0 w-[18px] h-[18px] pointer-events-none"
+          className="absolute -left-[18px] 2xl:-left-[22px] top-0 w-[18px] h-[18px] 2xl:w-[22px] 2xl:h-[22px] pointer-events-none"
           viewBox="0 0 18 18"
           fill="none"
         >
@@ -580,7 +581,7 @@ function NotchedSectionContainer({
         </svg>
         {/* Bottom-right inverted fillet curve */}
         <svg
-          className="absolute right-0 -bottom-[18px] w-[18px] h-[18px] pointer-events-none"
+          className="absolute right-0 -bottom-[18px] 2xl:-bottom-[22px] w-[18px] h-[18px] 2xl:w-[22px] 2xl:h-[22px] pointer-events-none"
           viewBox="0 0 18 18"
           fill="none"
         >
@@ -589,38 +590,40 @@ function NotchedSectionContainer({
 
         <button
           onClick={onActionClick}
-          className={`bg-[#141418] hover:bg-[#272730] active:scale-[0.98] text-white font-medium rounded-[11px] flex items-center gap-1 shadow-sm transition-all cursor-pointer whitespace-nowrap ${
-            compactHeader ? 'text-[10px] px-2.5 py-1.5' : 'text-[11px] px-3.5 py-2'
+          className={`bg-[#141418] hover:bg-[#272730] active:scale-[0.98] text-white font-medium rounded-[11px] 2xl:rounded-[13px] flex items-center gap-1 2xl:gap-1.5 shadow-sm transition-all cursor-pointer whitespace-nowrap ${
+            compactHeader
+              ? 'text-[10px] 2xl:text-[11px] px-2.5 py-1.5 2xl:px-3.5 2xl:py-2'
+              : 'text-[11px] 2xl:text-[13px] px-3.5 py-2 2xl:px-4.5 2xl:py-2.5'
           }`}
         >
           {actionIcon === 'grid' ? (
-            <LayoutGrid className="w-3 h-3 text-white fill-white/80 shrink-0" />
+            <LayoutGrid className="w-3 h-3 2xl:w-3.5 2xl:h-3.5 text-white fill-white/80 shrink-0" />
           ) : null}
           <span>{actionLabel}</span>
-          {actionIcon === 'arrow' ? <ArrowRight className="w-3 h-3 shrink-0" /> : null}
+          {actionIcon === 'arrow' ? <ArrowRight className="w-3 h-3 2xl:w-3.5 2xl:h-3.5 shrink-0" /> : null}
         </button>
       </div>
 
       {/* Main Content Area */}
-      <div className={`${compactHeader ? 'p-3 pt-3' : 'p-4 pt-3.5'} flex-1 flex flex-col justify-between`}>
+      <div className={`${compactHeader ? 'p-3 pt-3 2xl:p-4 2xl:pt-3.5' : 'p-4 pt-3.5 2xl:p-5 2xl:pt-4'} flex-1 flex flex-col justify-between`}>
         {/* Header Row */}
-        <div className={`flex items-center justify-between ${compactHeader ? 'pr-24 mb-2.5' : 'pr-36 mb-3'}`}>
-          <div className="flex items-center gap-2 flex-wrap min-w-0">
+        <div className={`flex items-center justify-between ${compactHeader ? 'pr-24 2xl:pr-32 mb-2.5 2xl:mb-3' : 'pr-36 2xl:pr-48 mb-3 2xl:mb-4'}`}>
+          <div className="flex items-center gap-2 2xl:gap-3 flex-wrap min-w-0">
             <h2
               className={`${
-                compactHeader ? 'text-xs font-semibold truncate' : 'text-sm sm:text-[15px] font-medium'
+                compactHeader ? 'text-xs 2xl:text-[13px] font-semibold truncate' : 'text-sm sm:text-[15px] 2xl:text-[17px] font-medium'
               } tracking-tight ${titleColorClass}`}
               title={title}
             >
               {title}
             </h2>
             {badge && (
-              <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-black/10 text-current opacity-90 whitespace-nowrap">
+              <span className="text-[9px] 2xl:text-[10px] font-semibold px-1.5 py-0.5 2xl:px-2 2xl:py-0.5 rounded-full bg-black/10 text-current opacity-90 whitespace-nowrap">
                 {badge}
               </span>
             )}
             {subtitle && (
-              <span className={`text-[11px] hidden xl:inline ${subtitleColorClass}`}>
+              <span className={`text-[11px] 2xl:text-xs hidden xl:inline ${subtitleColorClass}`}>
                 — {subtitle}
               </span>
             )}
@@ -702,26 +705,26 @@ export default function App() {
     <div className="min-h-screen bg-[#F6F5FC] text-zinc-900 font-sans pb-16 relative overflow-x-hidden selection:bg-purple-200 selection:text-purple-950">
       {/* Optional 40% / 40% / 20% (10-Column: 4 : 4 : 2) Visual Hierarchy & Symmetry Overlay */}
       {showSymmetryGrid && (
-        <div className="pointer-events-none fixed inset-0 z-40 max-w-[1280px] mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-10 gap-3.5 h-full">
+        <div className="pointer-events-none fixed inset-0 z-40 max-w-[1280px] xl:max-w-[1440px] 2xl:max-w-[1720px] mx-auto px-4 sm:px-6 2xl:px-8">
+          <div className="grid grid-cols-10 gap-3.5 2xl:gap-5 h-full">
             {Array.from({ length: 10 }).map((_, idx) => (
               <div
                 key={idx}
-                className="h-full bg-rose-500/[0.06] border-x border-rose-500/20 flex flex-col justify-between py-2 items-center text-[10px] font-mono text-rose-600 font-semibold"
+                className="h-full bg-rose-500/[0.06] border-x border-rose-500/20 flex flex-col justify-between py-2 items-center text-[10px] 2xl:text-xs font-mono text-rose-600 font-semibold"
               >
                 <span>{idx + 1}/10</span>
                 {idx === 1 && (
-                  <span className="bg-rose-600 text-white px-2 py-0.5 rounded shadow text-[9px] whitespace-nowrap">
+                  <span className="bg-rose-600 text-white px-2 py-0.5 rounded shadow text-[9px] 2xl:text-[10px] whitespace-nowrap">
                     40% Videos (2fr)
                   </span>
                 )}
                 {idx === 5 && (
-                  <span className="bg-rose-600 text-white px-2 py-0.5 rounded shadow text-[9px] whitespace-nowrap">
+                  <span className="bg-rose-600 text-white px-2 py-0.5 rounded shadow text-[9px] 2xl:text-[10px] whitespace-nowrap">
                     40% Books (2fr)
                   </span>
                 )}
                 {idx === 8 && (
-                  <span className="bg-rose-600 text-white px-2 py-0.5 rounded shadow text-[9px] whitespace-nowrap">
+                  <span className="bg-rose-600 text-white px-2 py-0.5 rounded shadow text-[9px] 2xl:text-[10px] whitespace-nowrap">
                     20% Exams (1fr)
                   </span>
                 )}
@@ -732,21 +735,21 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Centered Container (Compact Vertical Rhythm) */}
-      <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pt-3.5 space-y-4">
+      {/* Main Centered Container (Compact Vertical Rhythm with Upper Scaling Limit for 1080p Screens) */}
+      <div className="relative z-10 max-w-[1280px] xl:max-w-[1440px] 2xl:max-w-[1720px] mx-auto px-4 sm:px-6 2xl:px-8 pt-3.5 2xl:pt-5 space-y-4 2xl:space-y-5.5">
         {/* =====================================================================
             TIER 1: TOP NAVIGATION BAR (Compact floating gradient pill)
            ===================================================================== */}
-        <header className="rounded-[16px] bg-gradient-to-r from-[#DDD9F7] via-[#E8E6F5] to-[#E5E5EA] px-4 py-2 shadow-[0_4px_20px_-4px_rgba(98,25,189,0.08)] border border-white/80 flex flex-wrap items-center justify-between gap-3">
+        <header className="rounded-[16px] 2xl:rounded-[20px] bg-gradient-to-r from-[#DDD9F7] via-[#E8E6F5] to-[#E5E5EA] px-4 py-2 2xl:px-6 2xl:py-2.5 shadow-[0_4px_20px_-4px_rgba(98,25,189,0.08)] border border-white/80 flex flex-wrap items-center justify-between gap-3 2xl:gap-5">
           {/* Left: Pixel Logo + Free Contents Filter */}
-          <div className="flex items-center gap-6 sm:gap-8">
+          <div className="flex items-center gap-6 sm:gap-8 2xl:gap-10">
             <a
               href="#top"
               onClick={(e) => e.preventDefault()}
               className="flex items-center gap-1.5 select-none group"
             >
               <span
-                className="text-lg sm:text-xl font-bold tracking-wider text-[#6219BD]"
+                className="text-lg sm:text-xl 2xl:text-2xl font-bold tracking-wider text-[#6219BD]"
                 style={{
                   fontFamily: '"Courier New", Courier, monospace',
                   letterSpacing: '0.08em',
@@ -761,7 +764,7 @@ export default function App() {
             <div className="relative">
               <button
                 onClick={() => setFilterDropdownOpen((o) => !o)}
-                className="flex items-center gap-1.5 text-xs font-medium text-[#27272A] hover:text-[#6219BD] transition-colors py-1 px-2 rounded-lg hover:bg-white/50 cursor-pointer"
+                className="flex items-center gap-1.5 text-xs 2xl:text-[13px] font-medium text-[#27272A] hover:text-[#6219BD] transition-colors py-1 px-2 2xl:py-1.5 2xl:px-2.5 rounded-lg hover:bg-white/50 cursor-pointer"
               >
                 <span>
                   {accessFilter === 'ALL'
@@ -772,12 +775,12 @@ export default function App() {
                     ? 'PIN / Purchase'
                     : 'Enrolled Only'}
                 </span>
-                <ChevronDown className="w-3.5 h-3.5 opacity-75" />
+                <ChevronDown className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 opacity-75" />
               </button>
 
               {filterDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-48 rounded-xl bg-white shadow-xl border border-purple-100 py-1.5 z-50 text-xs">
-                  <div className="px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
+                <div className="absolute left-0 mt-2 w-48 2xl:w-56 rounded-xl bg-white shadow-xl border border-purple-100 py-1.5 z-50 text-xs 2xl:text-[13px]">
+                  <div className="px-3 py-1 text-[10px] 2xl:text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                     Filter by accessPolicy
                   </div>
                   {[
@@ -792,12 +795,12 @@ export default function App() {
                         setAccessFilter(opt.id);
                         setFilterDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-purple-50 transition-colors ${
+                      className={`w-full text-left px-3 py-2 2xl:py-2.5 flex items-center justify-between hover:bg-purple-50 transition-colors ${
                         accessFilter === opt.id ? 'text-[#6219BD] font-semibold bg-purple-50/60' : 'text-zinc-700'
                       }`}
                     >
                       <span>{opt.label}</span>
-                      {accessFilter === opt.id && <CheckCircle2 className="w-3.5 h-3.5 text-[#6219BD]" />}
+                      {accessFilter === opt.id && <CheckCircle2 className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-[#6219BD]" />}
                     </button>
                   ))}
                 </div>
@@ -806,33 +809,33 @@ export default function App() {
           </div>
 
           {/* Center: Pill Search Input */}
-          <div className="flex-1 max-w-md mx-auto min-w-[200px]">
+          <div className="flex-1 max-w-md 2xl:max-w-xl mx-auto min-w-[200px]">
             <div className="relative flex items-center">
-              <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-3.5 pointer-events-none" />
+              <Search className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-zinc-500 absolute left-3.5 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search for anything"
-                className="w-full bg-[#F8F8FA] hover:bg-white focus:bg-white text-xs text-zinc-800 placeholder-zinc-400 pl-9 pr-8 py-2 rounded-full border border-zinc-200/80 focus:outline-none focus:ring-2 focus:ring-[#6219BD]/30 transition-all shadow-inner"
+                className="w-full bg-[#F8F8FA] hover:bg-white focus:bg-white text-xs 2xl:text-[13px] text-zinc-800 placeholder-zinc-400 pl-9 2xl:pl-10 pr-8 py-2 2xl:py-2.5 rounded-full border border-zinc-200/80 focus:outline-none focus:ring-2 focus:ring-[#6219BD]/30 transition-all shadow-inner"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
                   className="absolute right-3 text-zinc-400 hover:text-zinc-600"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
                 </button>
               )}
             </div>
           </div>
 
           {/* Right: Login & Sign up Pills */}
-          <div className="flex items-center gap-2">
-            <button className="bg-[#673DE6] hover:bg-[#5B21B6] text-white text-xs font-medium px-5 py-2 rounded-[10px] shadow-sm transition-all cursor-pointer active:scale-95">
+          <div className="flex items-center gap-2 2xl:gap-3">
+            <button className="bg-[#673DE6] hover:bg-[#5B21B6] text-white text-xs 2xl:text-[13px] font-medium px-5 py-2 2xl:px-6 2xl:py-2.5 rounded-[10px] 2xl:rounded-[12px] shadow-sm transition-all cursor-pointer active:scale-95">
               Login
             </button>
-            <button className="bg-[#1F1F23] hover:bg-[#27272F] text-white text-xs font-medium px-5 py-2 rounded-[10px] shadow-sm transition-all cursor-pointer active:scale-95">
+            <button className="bg-[#1F1F23] hover:bg-[#27272F] text-white text-xs 2xl:text-[13px] font-medium px-5 py-2 2xl:px-6 2xl:py-2.5 rounded-[10px] 2xl:rounded-[12px] shadow-sm transition-all cursor-pointer active:scale-95">
               Sign up
             </button>
           </div>
@@ -857,38 +860,38 @@ export default function App() {
             onActionClick={() => setSelectedMaterial(FEATURED_COLLECTIONS[activeCourseIdx])}
           >
             {/* Compact 3-Card Symmetric Coverflow Stage */}
-            <div className="relative flex items-center justify-between gap-3 sm:gap-4 pb-2 px-1 sm:px-2">
+            <div className="relative flex items-center justify-between gap-3 sm:gap-4 2xl:gap-6 pb-2 px-1 sm:px-2">
               {/* Left Chevron Button */}
               <button
                 onClick={handlePrevCourse}
                 aria-label="Previous Featured Course"
-                className="w-8 h-8 rounded-full hover:bg-white/15 flex items-center justify-center text-white/90 hover:text-white transition-all cursor-pointer shrink-0"
+                className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full hover:bg-white/15 flex items-center justify-center text-white/90 hover:text-white transition-all cursor-pointer shrink-0"
               >
-                <ChevronLeft className="w-6 h-6 stroke-[1.75]" />
+                <ChevronLeft className="w-6 h-6 2xl:w-7 2xl:h-7 stroke-[1.75]" />
               </button>
 
               {/* Left Preview Card */}
               <div
                 onClick={handlePrevCourse}
-                className="hidden md:flex flex-col justify-between w-[27%] h-[135px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.01] group select-none shadow-md"
+                className="hidden md:flex flex-col justify-between w-[27%] h-[135px] xl:h-[155px] 2xl:h-[180px] rounded-[12px] 2xl:rounded-[16px] overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.01] group select-none shadow-md"
               >
                 {viewMode === 'wireframe' ? (
                   <div className="w-full h-full bg-[#D9DBD9]" />
                 ) : (
                   <div
-                    className={`w-full h-full bg-gradient-to-br ${FEATURED_COLLECTIONS[prevCourseIdx].accent} p-3.5 flex flex-col justify-between relative border border-white/15 opacity-85 group-hover:opacity-100`}
+                    className={`w-full h-full bg-gradient-to-br ${FEATURED_COLLECTIONS[prevCourseIdx].accent} p-3.5 2xl:p-4.5 flex flex-col justify-between relative border border-white/15 opacity-85 group-hover:opacity-100`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[9px] font-medium px-2 py-0.5 rounded bg-white/10 text-purple-100">
+                      <span className="text-[9px] 2xl:text-[10px] font-medium px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded bg-white/10 text-purple-100">
                         {FEATURED_COLLECTIONS[prevCourseIdx].badgeText}
                       </span>
                       <AccessPolicyBadge item={FEATURED_COLLECTIONS[prevCourseIdx]} darkBg />
                     </div>
                     <div>
-                      <h3 className="text-xs font-semibold text-white line-clamp-2 group-hover:text-purple-200 transition-colors">
+                      <h3 className="text-xs 2xl:text-[13px] font-semibold text-white line-clamp-2 group-hover:text-purple-200 transition-colors">
                         {FEATURED_COLLECTIONS[prevCourseIdx].title}
                       </h3>
-                      <p className="text-[10px] text-purple-200/70 mt-0.5">
+                      <p className="text-[10px] 2xl:text-[11px] text-purple-200/70 mt-0.5 2xl:mt-1">
                         By {FEATURED_COLLECTIONS[prevCourseIdx].metadata.author}
                       </p>
                     </div>
@@ -899,27 +902,27 @@ export default function App() {
               {/* Center Active Spotlight Card */}
               <div
                 onClick={() => setSelectedMaterial(FEATURED_COLLECTIONS[activeCourseIdx])}
-                className="flex-1 max-w-[430px] h-[175px] rounded-[14px] overflow-hidden cursor-pointer transition-all duration-300 shadow-xl group relative"
+                className="flex-1 max-w-[430px] xl:max-w-[520px] 2xl:max-w-[620px] h-[175px] xl:h-[200px] 2xl:h-[235px] rounded-[14px] 2xl:rounded-[18px] overflow-hidden cursor-pointer transition-all duration-300 shadow-xl group relative"
               >
                 {viewMode === 'wireframe' ? (
                   <div className="w-full h-full bg-[#D9DBD9]" />
                 ) : (
                   <div
-                    className={`w-full h-full bg-gradient-to-br ${FEATURED_COLLECTIONS[activeCourseIdx].accent} p-4 flex flex-col justify-between relative border border-white/25`}
+                    className={`w-full h-full bg-gradient-to-br ${FEATURED_COLLECTIONS[activeCourseIdx].accent} p-4 2xl:p-5.5 flex flex-col justify-between relative border border-white/25`}
                   >
-                    <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-purple-400/15 blur-2xl pointer-events-none" />
-                    <div className="absolute right-3 bottom-8 opacity-10 pointer-events-none">
-                      <Layers className="w-20 h-20 text-white" />
+                    <div className="absolute -right-8 -top-8 w-32 h-32 2xl:w-44 2xl:h-44 rounded-full bg-purple-400/15 blur-2xl pointer-events-none" />
+                    <div className="absolute right-3 bottom-8 2xl:right-5 2xl:bottom-10 opacity-10 pointer-events-none">
+                      <Layers className="w-20 h-20 2xl:w-28 2xl:h-28 text-white" />
                     </div>
 
                     {/* Top Row Badges */}
                     <div className="flex items-center justify-between gap-2 relative z-10">
-                      <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded bg-white/15 text-white backdrop-blur-sm">
-                          <Sparkles className="w-2.5 h-2.5 text-amber-300" />
+                      <div className="flex items-center gap-2 2xl:gap-2.5">
+                        <span className="inline-flex items-center gap-1 text-[10px] 2xl:text-[11px] font-semibold px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded bg-white/15 text-white backdrop-blur-sm">
+                          <Sparkles className="w-2.5 h-2.5 2xl:w-3 2xl:h-3 text-amber-300" />
                           COLLECTION
                         </span>
-                        <span className="text-[10px] text-purple-200/90">
+                        <span className="text-[10px] 2xl:text-[11px] text-purple-200/90">
                           {FEATURED_COLLECTIONS[activeCourseIdx].itemCount} Modules • {FEATURED_COLLECTIONS[activeCourseIdx].duration}
                         </span>
                       </div>
@@ -928,25 +931,25 @@ export default function App() {
 
                     {/* Center Title & Description */}
                     <div className="relative z-10 my-auto">
-                      <h3 className="text-sm sm:text-base font-bold text-white leading-snug group-hover:text-purple-100 transition-colors line-clamp-1">
+                      <h3 className="text-sm sm:text-base 2xl:text-lg font-bold text-white leading-snug group-hover:text-purple-100 transition-colors line-clamp-1">
                         {FEATURED_COLLECTIONS[activeCourseIdx].title}
                       </h3>
-                      <p className="text-[11px] text-purple-100/80 line-clamp-2 mt-1 leading-relaxed">
+                      <p className="text-[11px] 2xl:text-xs text-purple-100/80 line-clamp-2 mt-1 2xl:mt-1.5 leading-relaxed">
                         {FEATURED_COLLECTIONS[activeCourseIdx].description}
                       </p>
                     </div>
 
                     {/* Bottom Author & Action Footer */}
-                    <div className="flex items-center justify-between pt-2 border-t border-white/15 relative z-10">
-                      <div className="text-[11px] text-purple-100 truncate pr-2">
+                    <div className="flex items-center justify-between pt-2 2xl:pt-2.5 border-t border-white/15 relative z-10">
+                      <div className="text-[11px] 2xl:text-xs text-purple-100 truncate pr-2">
                         <span className="opacity-70">By </span>
                         <span className="font-semibold text-white">
                           {FEATURED_COLLECTIONS[activeCourseIdx].metadata.author}
                         </span>
                       </div>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-white text-[#4E129E] px-2.5 py-1 rounded-md group-hover:bg-purple-100 transition-colors shadow shrink-0">
+                      <span className="inline-flex items-center gap-1 text-[11px] 2xl:text-xs font-semibold bg-white text-[#4E129E] px-2.5 py-1 2xl:px-3 2xl:py-1.5 rounded-md 2xl:rounded-lg group-hover:bg-purple-100 transition-colors shadow shrink-0">
                         Open
-                        <ArrowRight className="w-3 h-3" />
+                        <ArrowRight className="w-3 h-3 2xl:w-3.5 2xl:h-3.5" />
                       </span>
                     </div>
                   </div>
@@ -956,25 +959,25 @@ export default function App() {
               {/* Right Preview Card */}
               <div
                 onClick={handleNextCourse}
-                className="hidden md:flex flex-col justify-between w-[27%] h-[135px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.01] group select-none shadow-md"
+                className="hidden md:flex flex-col justify-between w-[27%] h-[135px] xl:h-[155px] 2xl:h-[180px] rounded-[12px] 2xl:rounded-[16px] overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.01] group select-none shadow-md"
               >
                 {viewMode === 'wireframe' ? (
                   <div className="w-full h-full bg-[#D9DBD9]" />
                 ) : (
                   <div
-                    className={`w-full h-full bg-gradient-to-br ${FEATURED_COLLECTIONS[nextCourseIdx].accent} p-3.5 flex flex-col justify-between relative border border-white/15 opacity-85 group-hover:opacity-100`}
+                    className={`w-full h-full bg-gradient-to-br ${FEATURED_COLLECTIONS[nextCourseIdx].accent} p-3.5 2xl:p-4.5 flex flex-col justify-between relative border border-white/15 opacity-85 group-hover:opacity-100`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[9px] font-medium px-2 py-0.5 rounded bg-white/10 text-purple-100">
+                      <span className="text-[9px] 2xl:text-[10px] font-medium px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded bg-white/10 text-purple-100">
                         {FEATURED_COLLECTIONS[nextCourseIdx].badgeText}
                       </span>
                       <AccessPolicyBadge item={FEATURED_COLLECTIONS[nextCourseIdx]} darkBg />
                     </div>
                     <div>
-                      <h3 className="text-xs font-semibold text-white line-clamp-2 group-hover:text-purple-200 transition-colors">
+                      <h3 className="text-xs 2xl:text-[13px] font-semibold text-white line-clamp-2 group-hover:text-purple-200 transition-colors">
                         {FEATURED_COLLECTIONS[nextCourseIdx].title}
                       </h3>
-                      <p className="text-[10px] text-purple-200/70 mt-0.5">
+                      <p className="text-[10px] 2xl:text-[11px] text-purple-200/70 mt-0.5 2xl:mt-1">
                         By {FEATURED_COLLECTIONS[nextCourseIdx].metadata.author}
                       </p>
                     </div>
@@ -986,14 +989,14 @@ export default function App() {
               <button
                 onClick={handleNextCourse}
                 aria-label="Next Featured Course"
-                className="w-8 h-8 rounded-full hover:bg-white/15 flex items-center justify-center text-white/90 hover:text-white transition-all cursor-pointer shrink-0"
+                className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full hover:bg-white/15 flex items-center justify-center text-white/90 hover:text-white transition-all cursor-pointer shrink-0"
               >
-                <ChevronRight className="w-6 h-6 stroke-[1.75]" />
+                <ChevronRight className="w-6 h-6 2xl:w-7 2xl:h-7 stroke-[1.75]" />
               </button>
             </div>
 
             {/* Bottom Pagination Indicator (`o o o [===] o o o`) */}
-            <div className="flex items-center justify-center gap-1.5">
+            <div className="flex items-center justify-center gap-1.5 2xl:gap-2">
               {FEATURED_COLLECTIONS.map((col, idx) => {
                 const isActive = idx === activeCourseIdx;
                 return (
@@ -1003,8 +1006,8 @@ export default function App() {
                     aria-label={`Slide ${idx + 1}`}
                     className={`transition-all cursor-pointer rounded-full ${
                       isActive
-                        ? 'w-12 h-2 bg-[#D9DBD9] shadow-sm'
-                        : 'w-1.5 h-1.5 border border-white/60 bg-transparent hover:bg-white/40'
+                        ? 'w-12 2xl:w-16 h-2 2xl:h-2.5 bg-[#D9DBD9] shadow-sm'
+                        : 'w-1.5 2xl:w-2 h-1.5 2xl:h-2 border border-white/60 bg-transparent hover:bg-white/40'
                     }`}
                   />
                 );
@@ -1019,7 +1022,7 @@ export default function App() {
            ===================================================================== */}
         <section
           aria-label="Featured Videos, Featured Books, and Upcoming Certification Exams"
-          className="grid grid-cols-1 md:grid-cols-10 gap-3.5 items-stretch"
+          className="grid grid-cols-1 md:grid-cols-10 gap-3.5 2xl:gap-5 items-stretch"
         >
           {/* -------------------------------------------------------------------
               COLUMN 1 (40% WIDTH / 4 OF 10 COLS): FEATURED VIDEOS (`type: 'VIDEO'`)
@@ -1034,29 +1037,29 @@ export default function App() {
               titleColorClass="text-[#18181B]"
               onActionClick={() => setSelectedMaterial(spotlightVideo)}
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 2xl:gap-2.5">
                 {(filteredVideos.length > 0 ? filteredVideos : FEATURED_VIDEOS)
                   .slice(0, 3)
                   .map((vid) => (
                     <div
                       key={vid.id}
                       onClick={() => setSelectedMaterial(vid)}
-                      className="bg-[#181722] hover:bg-[#232131] text-white rounded-[12px] p-2.5 flex items-center gap-3.5 shadow-xs transition-all cursor-pointer group h-[68px]"
+                      className="bg-[#181722] hover:bg-[#232131] text-white rounded-[12px] 2xl:rounded-[15px] p-2.5 2xl:p-3 flex items-center gap-3.5 2xl:gap-4 shadow-xs transition-all cursor-pointer group h-[68px] xl:h-[78px] 2xl:h-[88px]"
                     >
                       {/* Spacious 16:9 Widescreen Video Thumbnail */}
-                      <div className="w-24 h-13 rounded-[8px] overflow-hidden shrink-0 relative bg-[#D9DBD9] shadow-inner">
+                      <div className="w-24 h-13 xl:w-28 xl:h-[58px] 2xl:w-[124px] 2xl:h-[66px] rounded-[8px] 2xl:rounded-[10px] overflow-hidden shrink-0 relative bg-[#D9DBD9] shadow-inner">
                         {viewMode === 'wireframe' ? (
                           <div className="w-full h-full bg-[#D9DBD9] flex items-center justify-center">
-                            <Play className="w-4 h-4 text-zinc-500" />
+                            <Play className="w-4 h-4 2xl:w-5 2xl:h-5 text-zinc-500" />
                           </div>
                         ) : (
                           <div
                             className={`w-full h-full bg-gradient-to-br ${vid.gradient} flex items-center justify-center relative`}
                           >
-                            <div className="w-6 h-6 rounded-full bg-white/95 text-[#6219BD] flex items-center justify-center shadow group-hover:scale-110 transition-transform">
-                              <Play className="w-3 h-3 fill-current ml-0.5" />
+                            <div className="w-6 h-6 2xl:w-7 2xl:h-7 rounded-full bg-white/95 text-[#6219BD] flex items-center justify-center shadow group-hover:scale-110 transition-transform">
+                              <Play className="w-3 h-3 2xl:w-3.5 2xl:h-3.5 fill-current ml-0.5" />
                             </div>
-                            <span className="absolute bottom-1 right-1 bg-black/80 text-[8px] font-mono px-1.5 py-0.2 rounded text-white">
+                            <span className="absolute bottom-1 right-1 bg-black/80 text-[8px] 2xl:text-[9px] font-mono px-1.5 py-0.2 2xl:px-2 2xl:py-0.5 rounded text-white">
                               {vid.duration}
                             </span>
                           </div>
@@ -1066,21 +1069,21 @@ export default function App() {
                       {/* Rich Video Metadata utilizing the 40% width */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <h3 className="text-xs sm:text-[13px] font-medium text-white group-hover:text-purple-200 transition-colors truncate">
+                          <h3 className="text-xs sm:text-[13px] 2xl:text-[14px] font-medium text-white group-hover:text-purple-200 transition-colors truncate">
                             {vid.title}
                           </h3>
                         </div>
 
-                        <div className="flex items-center flex-wrap gap-2 mt-1.5">
-                          <span className="text-[10px] text-zinc-300 font-medium truncate">
+                        <div className="flex items-center flex-wrap gap-2 2xl:gap-2.5 mt-1.5">
+                          <span className="text-[10px] 2xl:text-[11px] text-zinc-300 font-medium truncate">
                             {vid.metadata?.author}
                           </span>
-                          <span className="text-zinc-600 text-[10px]">•</span>
+                          <span className="text-zinc-600 text-[10px] 2xl:text-[11px]">•</span>
                           <AccessPolicyBadge item={vid} darkBg />
                           {vid.metadata?.tags?.slice(0, 2).map((tag) => (
                             <span
                               key={tag}
-                              className="hidden sm:inline-block text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-purple-200/90"
+                              className="hidden sm:inline-block text-[9px] 2xl:text-[10px] px-1.5 py-0.5 2xl:px-2 2xl:py-0.5 rounded bg-white/10 text-purple-200/90"
                             >
                               #{tag}
                             </span>
@@ -1090,11 +1093,11 @@ export default function App() {
 
                       {/* Watch Action Pill */}
                       <div className="flex items-center gap-1.5 shrink-0">
-                        <span className="hidden sm:inline-block text-[10px] font-medium text-purple-200/80 group-hover:text-white transition-colors">
+                        <span className="hidden sm:inline-block text-[10px] 2xl:text-[11px] font-medium text-purple-200/80 group-hover:text-white transition-colors">
                           Watch
                         </span>
-                        <div className="w-6 h-6 rounded-full bg-white text-[#181722] group-hover:bg-purple-300 flex items-center justify-center transition-colors">
-                          <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                        <div className="w-6 h-6 2xl:w-7 2xl:h-7 rounded-full bg-white text-[#181722] group-hover:bg-purple-300 flex items-center justify-center transition-colors">
+                          <ChevronRight className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 stroke-[2.5]" />
                         </div>
                       </div>
                     </div>
@@ -1106,7 +1109,7 @@ export default function App() {
                   aria-label="More featured videos"
                   className="mx-auto mt-0.5 text-indigo-950/70 hover:text-indigo-950 transition-colors cursor-pointer"
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 2xl:w-5 2xl:h-5" />
                 </button>
               </div>
             </NotchedSectionContainer>
@@ -1125,29 +1128,29 @@ export default function App() {
               titleColorClass="text-[#18181B]"
               onActionClick={() => setSelectedMaterial(FEATURED_BOOKS[0])}
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 2xl:gap-2.5">
                 {(filteredBooks.length > 0 ? filteredBooks : FEATURED_BOOKS)
                   .slice(0, 3)
                   .map((book) => (
                     <div
                       key={book.id}
                       onClick={() => setSelectedMaterial(book)}
-                      className="bg-white/95 hover:bg-white rounded-[12px] p-2.5 flex items-center gap-3.5 shadow-xs hover:shadow border border-stone-200/80 hover:border-[#6219BD]/40 transition-all cursor-pointer group h-[68px]"
+                      className="bg-white/95 hover:bg-white rounded-[12px] 2xl:rounded-[15px] p-2.5 2xl:p-3 flex items-center gap-3.5 2xl:gap-4 shadow-xs hover:shadow border border-stone-200/80 hover:border-[#6219BD]/40 transition-all cursor-pointer group h-[68px] xl:h-[78px] 2xl:h-[88px]"
                     >
                       {/* 3:4 Portrait Book Spine & Cover */}
-                      <div className="w-11 h-13 rounded-[5px] overflow-hidden shrink-0 relative shadow-xs flex">
+                      <div className="w-11 h-13 xl:w-12 xl:h-[58px] 2xl:w-[50px] 2xl:h-[66px] rounded-[5px] 2xl:rounded-[7px] overflow-hidden shrink-0 relative shadow-xs flex">
                         {viewMode === 'wireframe' ? (
                           <div className="w-full h-full bg-[#D9DBD9]" />
                         ) : (
                           <>
-                            <div className={`w-1.5 h-full ${book.spineColor} shrink-0`} />
+                            <div className={`w-1.5 2xl:w-2 h-full ${book.spineColor} shrink-0`} />
                             <div
                               className={`flex-1 h-full bg-gradient-to-b ${book.coverTint} p-1 flex flex-col justify-between text-white`}
                             >
-                              <span className="text-[7px] font-mono uppercase text-white/90 bg-black/35 px-1 rounded w-fit">
+                              <span className="text-[7px] 2xl:text-[8px] font-mono uppercase text-white/90 bg-black/35 px-1 rounded w-fit">
                                 PDF
                               </span>
-                              <BookOpen className="w-3.5 h-3.5 text-white/90 mx-auto my-auto group-hover:scale-110 transition-transform" />
+                              <BookOpen className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-white/90 mx-auto my-auto group-hover:scale-110 transition-transform" />
                             </div>
                           </>
                         )}
@@ -1155,20 +1158,20 @@ export default function App() {
 
                       {/* Rich Book Metadata utilizing the 40% width */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-xs sm:text-[13px] font-medium text-zinc-900 group-hover:text-[#6219BD] transition-colors truncate">
+                        <h3 className="text-xs sm:text-[13px] 2xl:text-[14px] font-medium text-zinc-900 group-hover:text-[#6219BD] transition-colors truncate">
                           {book.title}
                         </h3>
-                        <div className="flex items-center flex-wrap gap-2 mt-1.5">
-                          <span className="text-[10px] text-zinc-600 font-medium truncate">
+                        <div className="flex items-center flex-wrap gap-2 2xl:gap-2.5 mt-1.5">
+                          <span className="text-[10px] 2xl:text-[11px] text-zinc-600 font-medium truncate">
                             {book.metadata?.author}
                           </span>
-                          <span className="text-zinc-300 text-[10px]">•</span>
-                          <span className="text-[10px] text-zinc-500">{book.pages}</span>
+                          <span className="text-zinc-300 text-[10px] 2xl:text-[11px]">•</span>
+                          <span className="text-[10px] 2xl:text-[11px] text-zinc-500">{book.pages}</span>
                           <AccessPolicyBadge item={book} darkBg={false} />
                           {book.metadata?.tags?.slice(0, 1).map((tag) => (
                             <span
                               key={tag}
-                              className="hidden xl:inline-block text-[9px] px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 border border-stone-200"
+                              className="hidden xl:inline-block text-[9px] 2xl:text-[10px] px-1.5 py-0.5 rounded bg-stone-100 text-stone-600 border border-stone-200"
                             >
                               #{tag}
                             </span>
@@ -1182,9 +1185,9 @@ export default function App() {
                           e.stopPropagation();
                           setSelectedMaterial(book);
                         }}
-                        className="bg-[#09090B] hover:bg-[#6219BD] text-white text-[10px] font-medium px-3 py-1.5 rounded-[7px] shrink-0 transition-colors cursor-pointer flex items-center gap-1"
+                        className="bg-[#09090B] hover:bg-[#6219BD] text-white text-[10px] 2xl:text-[11px] font-medium px-3 py-1.5 2xl:px-3.5 2xl:py-2 rounded-[7px] 2xl:rounded-[9px] shrink-0 transition-colors cursor-pointer flex items-center gap-1 2xl:gap-1.5"
                       >
-                        <FileText className="w-3 h-3" />
+                        <FileText className="w-3 h-3 2xl:w-3.5 2xl:h-3.5" />
                         <span>Read</span>
                       </button>
                     </div>
@@ -1196,7 +1199,7 @@ export default function App() {
                   aria-label="More featured books"
                   className="mx-auto mt-0.5 text-zinc-700 hover:text-zinc-950 transition-colors cursor-pointer"
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 2xl:w-5 2xl:h-5" />
                 </button>
               </div>
             </NotchedSectionContainer>
@@ -1217,32 +1220,32 @@ export default function App() {
               compactHeader={true}
               onActionClick={() => {}}
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 2xl:gap-2.5">
                 {UPCOMING_EXAMS.map((exam) => (
                   <div
                     key={exam.id}
-                    className="bg-gradient-to-r from-white via-[#F9F8FF] to-white rounded-[11px] px-2.5 py-2 flex flex-col justify-between shadow-xs border border-white/90 h-[68px]"
+                    className="bg-gradient-to-r from-white via-[#F9F8FF] to-white rounded-[11px] 2xl:rounded-[14px] px-2.5 py-2 2xl:px-3 2xl:py-2.5 flex flex-col justify-between shadow-xs border border-white/90 h-[68px] xl:h-[78px] 2xl:h-[88px]"
                   >
                     {/* Top Row: Exam Title + Visibility Pill */}
                     <div className="flex items-start justify-between gap-1.5">
                       <h4
-                        className="text-[11px] font-semibold text-zinc-900 leading-tight line-clamp-1"
+                        className="text-[11px] 2xl:text-xs font-semibold text-zinc-900 leading-tight line-clamp-1"
                         title={exam.title}
                       >
                         {exam.title}
                       </h4>
-                      <span className="bg-[#7C3AED] text-white text-[8px] font-medium px-1.5 py-0.5 rounded-full shrink-0 leading-none">
+                      <span className="bg-[#7C3AED] text-white text-[8px] 2xl:text-[9px] font-medium px-1.5 py-0.5 rounded-full shrink-0 leading-none">
                         {exam.visibility}
                       </span>
                     </div>
 
                     {/* Bottom Row: Compact Red Timer + Dark Register Button */}
                     <div className="flex items-center justify-between gap-1.5 pt-1 border-t border-zinc-100">
-                      <span className="text-[9px] font-semibold text-rose-600 truncate">
+                      <span className="text-[9px] 2xl:text-[10px] font-semibold text-rose-600 truncate">
                         ⏳ {exam.timeRemaining}
                       </span>
 
-                      <button className="bg-[#09090B] hover:bg-[#6219BD] text-white text-[9px] font-medium px-2 py-1 rounded-[5px] shrink-0 transition-colors cursor-pointer leading-none">
+                      <button className="bg-[#09090B] hover:bg-[#6219BD] text-white text-[9px] 2xl:text-[10px] font-medium px-2 py-1 2xl:px-2.5 2xl:py-1.5 rounded-[5px] 2xl:rounded-[7px] shrink-0 transition-colors cursor-pointer leading-none">
                         Register
                       </button>
                     </div>
@@ -1254,7 +1257,7 @@ export default function App() {
                   aria-label="Show more exams"
                   className="mx-auto mt-0.5 text-zinc-900/80 hover:text-zinc-950 transition-colors cursor-pointer"
                 >
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 2xl:w-5 2xl:h-5" />
                 </button>
               </div>
             </NotchedSectionContainer>
@@ -1262,100 +1265,103 @@ export default function App() {
         </section>
 
         {/* =====================================================================
-            TIER 4: TOP INSTITUTIONS (Sleek Full-Width Horizontal Strip)
-            Left 5 Cols: Spotlight Institution ('Void Pavilion')
-            Right 7 Cols: 3-Column Horizontal Grid of Partner Universities
+            TIER 4: TOP INSTITUTIONS (Matched with Figma UI Layout)
+            Left: Spotlight Institution ('Void Pavilion')
+            Right: 3 Vertically Stacked Partner Universities
            ===================================================================== */}
         <section aria-label="Top Institutions">
           <NotchedSectionContainer
             title="Top Institutions"
-            badge={showSymmetryGrid ? '12 Cols • 5:7 Horizontal Strip' : null}
             actionLabel="Explore Institutions"
             actionIcon="grid"
-            bgClass="bg-[#EAE7E1]"
+            bgClass="bg-[#E5DFD6]"
             titleColorClass="text-[#18181B]"
             onActionClick={() => {}}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
-              {/* Left 5 Cols: Compact Horizontal Spotlight Institution Card */}
-              <div className="lg:col-span-5 bg-[#1B1A23] text-white rounded-[14px] p-3.5 flex flex-col justify-between shadow-sm">
-                <div className="flex items-start gap-3.5">
-                  <div className="w-14 h-14 rounded-[10px] bg-[#D9DBD9] shrink-0 flex items-center justify-center text-zinc-700 font-bold text-sm shadow-inner">
-                    {viewMode === 'wireframe' ? null : spotlightInstitution.badge}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="text-base sm:text-lg font-normal tracking-tight text-white truncate">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 2xl:gap-5 items-stretch">
+              {/* Left Column: Spotlight Institution Card ('Void Pavilion') */}
+              <div className="bg-[#1D1B26] text-white rounded-[16px] 2xl:rounded-[20px] p-4.5 sm:p-5 2xl:p-6 flex flex-col justify-between shadow-sm">
+                <div>
+                  {/* Top Row: Square Avatar + Name & Verified Pill */}
+                  <div className="flex items-start gap-4 2xl:gap-5">
+                    <div className="w-18 h-18 sm:w-20 sm:h-20 2xl:w-24 2xl:h-24 rounded-[12px] 2xl:rounded-[15px] bg-[#D9D9D9] shrink-0" />
+                    <div className="min-w-0 flex-1 pt-0.5">
+                      <h3 className="text-xl sm:text-2xl 2xl:text-[28px] font-normal tracking-tight text-white truncate">
                         {spotlightInstitution.name}
                       </h3>
-                      <span className="inline-flex items-center gap-1 bg-white text-zinc-900 text-[10px] font-medium px-2 py-0.5 rounded-full shadow-xs">
-                        <CheckCircle2 className="w-3 h-3 text-emerald-500 fill-emerald-500/20" />
-                        <span>Verified</span>
-                      </span>
+                      <div className="mt-2">
+                        <span className="inline-flex items-center gap-1.5 bg-white text-zinc-900 text-xs 2xl:text-[13px] font-semibold px-2.5 py-0.5 rounded-full shadow-xs">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600/20" />
+                          <span>Verified</span>
+                        </span>
+                      </div>
                     </div>
-                    <p className="text-[11px] text-zinc-300 line-clamp-2 mt-1 leading-relaxed font-light">
-                      {spotlightInstitution.description}
-                    </p>
                   </div>
+
+                  {/* Middle Description */}
+                  <p className="text-xs sm:text-[13px] 2xl:text-sm text-zinc-300/85 line-clamp-3 mt-4 2xl:mt-5 leading-relaxed font-light">
+                    {spotlightInstitution.description}
+                  </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-2.5 mt-2.5 border-t border-white/10">
-                  <div className="flex items-center gap-4 text-[11px] text-zinc-300">
+                {/* Bottom Row: Stats & Black Visit Button */}
+                <div className="flex items-center justify-between pt-4 mt-4 border-t border-white/10">
+                  <div className="flex items-center gap-5 2xl:gap-6 text-xs 2xl:text-[13px] text-zinc-300">
                     <span className="inline-flex items-center gap-1.5">
-                      <GraduationCap className="w-3.5 h-3.5 text-white" />
+                      <GraduationCap className="w-4 h-4 2xl:w-4.5 2xl:h-4.5 text-white" />
                       {spotlightInstitution.courses} Courses
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <FileSpreadsheet className="w-3.5 h-3.5 text-white" />
+                      <FileSpreadsheet className="w-4 h-4 2xl:w-4.5 2xl:h-4.5 text-white" />
                       {spotlightInstitution.exams} Exams
                     </span>
                   </div>
 
-                  <button className="bg-[#09090B] hover:bg-[#6219BD] text-white text-[11px] font-medium px-3.5 py-1.5 rounded-[8px] inline-flex items-center gap-1.5 transition-colors cursor-pointer">
+                  <button className="bg-[#0D0D12] hover:bg-black text-white text-xs 2xl:text-[13px] font-medium px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-[10px] 2xl:rounded-[12px] inline-flex items-center gap-1.5 transition-colors cursor-pointer">
                     <span>Visit</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <ArrowRight className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
                   </button>
                 </div>
               </div>
 
-              {/* Right 7 Cols: 3 Partner Institutions in a Horizontal 3-Column Row */}
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Right Column: 3 Vertically Stacked Partner Universities */}
+              <div className="flex flex-col justify-between gap-2.5 2xl:gap-3.5 h-full">
                 {sideInstitutions.map((inst) => {
                   const realIdx = TOP_INSTITUTIONS.findIndex((i) => i.id === inst.id);
                   return (
                     <div
                       key={inst.id}
                       onClick={() => setActiveInstitutionIdx(realIdx)}
-                      className="bg-[#1B1A23] hover:bg-[#252430] text-white rounded-[14px] p-3.5 flex flex-col justify-between cursor-pointer group transition-all shadow-sm"
+                      className="bg-[#1D1B26] hover:bg-[#252331] text-white rounded-[14px] 2xl:rounded-[18px] p-3 sm:p-3.5 2xl:p-4 px-3.5 sm:px-4 2xl:px-5 flex items-center gap-3.5 2xl:gap-4.5 cursor-pointer group transition-all shadow-sm flex-1"
                     >
-                      <div className="flex items-start justify-between gap-2">
-                        {/* Square Grey Avatar with Green Check Badge */}
-                        <div className="relative w-11 h-11 rounded-[9px] bg-[#D9DBD9] shrink-0 flex items-center justify-center text-zinc-700 font-bold text-xs">
-                          {viewMode === 'wireframe' ? null : inst.badge}
-                          <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow">
-                            <CheckCircle2 className="w-2.5 h-2.5" />
-                          </span>
-                        </div>
-
-                        {/* Right Circular Chevron */}
-                        <div className="w-6 h-6 rounded-full bg-white text-[#1B1A23] group-hover:bg-purple-300 flex items-center justify-center shrink-0 transition-colors">
-                          <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                        </div>
+                      {/* Square Grey Avatar with Green Check Badge */}
+                      <div className="relative w-13 h-13 sm:w-14 sm:h-14 2xl:w-16 2xl:h-16 rounded-[10px] 2xl:rounded-[12px] bg-[#D9D9D9] shrink-0">
+                        <span className="absolute -top-1 -right-1 w-3.5 h-3.5 2xl:w-4 2xl:h-4 rounded-full bg-[#16A34A] text-white flex items-center justify-center shadow-xs">
+                          <Check className="w-2.5 h-2.5 2xl:w-3 2xl:h-3 stroke-[3]" />
+                        </span>
                       </div>
 
-                      <div className="mt-2.5">
-                        <h4 className="text-xs sm:text-[13px] font-normal text-white group-hover:text-purple-200 line-clamp-1">
+                      {/* Content (Name on top, Stats + Lavender Chevron Action on bottom) */}
+                      <div className="flex-1 min-w-0 flex flex-col justify-between h-full py-0.5">
+                        <h4 className="text-sm sm:text-[15px] 2xl:text-base font-normal text-white group-hover:text-purple-200 transition-colors truncate">
                           {inst.name}
                         </h4>
-                        <div className="flex items-center gap-3 text-[10px] text-zinc-300 mt-1.5">
-                          <span className="inline-flex items-center gap-1">
-                            <GraduationCap className="w-3 h-3 text-white" />
-                            {inst.courses} Courses
-                          </span>
-                          <span className="inline-flex items-center gap-1">
-                            <FileSpreadsheet className="w-3 h-3 text-white" />
-                            {inst.exams} Exams
-                          </span>
+
+                        <div className="flex items-center justify-between gap-2 pt-1.5">
+                          <div className="flex items-center gap-4 2xl:gap-5 text-[11px] 2xl:text-xs text-zinc-300">
+                            <span className="inline-flex items-center gap-1.5">
+                              <GraduationCap className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-white" />
+                              {inst.courses} Courses
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                              <FileSpreadsheet className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-white" />
+                              {inst.exams} Exams
+                            </span>
+                          </div>
+
+                          <div className="w-6 h-6 2xl:w-7 2xl:h-7 rounded-full bg-[#DBD6EC] text-[#1D1B26] group-hover:bg-white flex items-center justify-center shrink-0 transition-colors shadow-xs">
+                            <ChevronRight className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 stroke-[2.5]" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1371,35 +1377,35 @@ export default function App() {
           FLOATING DESIGN & API INSPECTOR TOOLBAR (Bottom Right)
           Allows toggling Rich UI vs. Clean Figma Wireframe + 12-Col Grid Lines
          ===================================================================== */}
-      <div className="fixed bottom-4 right-4 z-50 flex flex-wrap items-center gap-2 bg-[#18181C]/95 backdrop-blur-md text-white p-2 rounded-2xl shadow-2xl border border-white/15 text-xs">
-        <span className="px-2.5 py-1 text-[11px] font-semibold text-purple-300 flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5" />
+      <div className="fixed bottom-4 right-4 2xl:bottom-6 2xl:right-6 z-50 flex flex-wrap items-center gap-2 bg-[#18181C]/95 backdrop-blur-md text-white p-2 2xl:p-2.5 rounded-2xl shadow-2xl border border-white/15 text-xs 2xl:text-sm">
+        <span className="px-2.5 py-1 text-[11px] 2xl:text-xs font-semibold text-purple-300 flex items-center gap-1.5">
+          <Sparkles className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
           Design Controls:
         </span>
 
         {/* Toggle Rich vs Wireframe */}
         <button
           onClick={() => setViewMode((m) => (m === 'rich' ? 'wireframe' : 'rich'))}
-          className={`px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
+          className={`px-3 py-1.5 2xl:px-3.5 2xl:py-2 rounded-xl font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
             viewMode === 'wireframe'
               ? 'bg-[#6B2CF5] text-white'
               : 'bg-white/10 hover:bg-white/20 text-zinc-200'
           }`}
         >
-          <Eye className="w-3.5 h-3.5" />
+          <Eye className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
           <span>{viewMode === 'rich' ? 'Switch to Wireframe' : 'Showing Wireframe'}</span>
         </button>
 
         {/* Toggle 40/40/20 Symmetry Overlay */}
         <button
           onClick={() => setShowSymmetryGrid((g) => !g)}
-          className={`px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
+          className={`px-3 py-1.5 2xl:px-3.5 2xl:py-2 rounded-xl font-medium flex items-center gap-1.5 transition-all cursor-pointer ${
             showSymmetryGrid
               ? 'bg-rose-600 text-white'
               : 'bg-white/10 hover:bg-white/20 text-zinc-200'
           }`}
         >
-          <Grid className="w-3.5 h-3.5" />
+          <Grid className="w-3.5 h-3.5 2xl:w-4 2xl:h-4" />
           <span>40 / 40 / 20 Grid</span>
         </button>
       </div>
@@ -1415,20 +1421,20 @@ export default function App() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-purple-100 space-y-4 animate-in fade-in zoom-in-95 duration-150"
+            className="bg-white rounded-2xl max-w-lg 2xl:max-w-2xl w-full p-6 2xl:p-8 shadow-2xl border border-purple-100 space-y-4 animate-in fade-in zoom-in-95 duration-150"
           >
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-[#6219BD]">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] 2xl:text-xs font-bold uppercase tracking-wider bg-purple-100 text-[#6219BD]">
                     {selectedMaterial.kind}
                     {selectedMaterial.type ? ` • ${selectedMaterial.type}` : ''}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] 2xl:text-xs font-semibold bg-emerald-100 text-emerald-800">
                     isFeatured: true
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-zinc-900 mt-1.5">
+                <h3 className="text-lg 2xl:text-xl font-bold text-zinc-900 mt-1.5">
                   {selectedMaterial.title}
                 </h3>
               </div>
@@ -1436,19 +1442,19 @@ export default function App() {
                 onClick={() => setSelectedMaterial(null)}
                 className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 cursor-pointer"
               >
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4 2xl:w-5 2xl:h-5" />
               </button>
             </div>
 
-            <p className="text-xs text-zinc-600 leading-relaxed">
+            <p className="text-xs 2xl:text-sm text-zinc-600 leading-relaxed">
               {selectedMaterial.description}
             </p>
 
             {/* Endpoint Call Breakdown */}
-            <div className="bg-zinc-950 text-zinc-100 rounded-xl p-3.5 font-mono text-[11px] space-y-2 overflow-x-auto">
-              <div className="flex items-center justify-between text-zinc-400 text-[10px]">
+            <div className="bg-zinc-950 text-zinc-100 rounded-xl p-3.5 2xl:p-4.5 font-mono text-[11px] 2xl:text-xs space-y-2 overflow-x-auto">
+              <div className="flex items-center justify-between text-zinc-400 text-[10px] 2xl:text-[11px]">
                 <span className="flex items-center gap-1">
-                  <Code2 className="w-3.5 h-3.5 text-purple-400" />
+                  <Code2 className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-purple-400" />
                   Resources API Integration
                 </span>
                 <span>200 OK</span>
@@ -1458,7 +1464,7 @@ export default function App() {
                   ? 'GET /api/v1/resource-collections?featured=true'
                   : `GET /api/v1/resources?type=${selectedMaterial.type}&featured=true`}
               </div>
-              <pre className="text-[10px] text-purple-200 leading-relaxed">
+              <pre className="text-[10px] 2xl:text-[11px] text-purple-200 leading-relaxed">
                 {JSON.stringify(
                   {
                     id: selectedMaterial.id,
@@ -1484,12 +1490,12 @@ export default function App() {
             </div>
 
             <div className="flex items-center justify-between pt-2">
-              <span className="text-xs text-zinc-500">
+              <span className="text-xs 2xl:text-sm text-zinc-500">
                 Access Policy: <strong className="text-zinc-800">{selectedMaterial.accessPolicy}</strong>
               </span>
               <button
                 onClick={() => setSelectedMaterial(null)}
-                className="bg-[#6219BD] hover:bg-[#4E129E] text-white text-xs font-medium px-4 py-2 rounded-xl transition-colors cursor-pointer"
+                className="bg-[#6219BD] hover:bg-[#4E129E] text-white text-xs 2xl:text-sm font-medium px-4 py-2 2xl:px-5 2xl:py-2.5 rounded-xl transition-colors cursor-pointer"
               >
                 Done
               </button>
