@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F6F5FC;
+  --foreground: #18181B;
+  --wb-purple-primary: #6219BD;
+  --wb-purple-accent: #673DE6;
+  --wb-purple-dark: #4E129E;
+  --wb-charcoal-dark: #141418;
+  --wb-charcoal-card: #181722;
+  --wb-institution-dark: #1D1B26;
 }
 
 @theme inline {
@@ -12,15 +18,222 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT & CONTAINER STYLES (Mobile, Tablet, Laptop, Desktop PC)
+   ========================================================================== */
+
+.wb-page-root {
+  @apply min-h-screen bg-[#F6F5FC] text-zinc-900 font-sans pb-16 relative overflow-x-hidden selection:bg-purple-200 selection:text-purple-950;
+}
+
+.wb-container {
+  @apply relative z-10 mx-auto px-3 sm:px-6 2xl:px-8 pt-3 sm:pt-4 2xl:pt-6 space-y-3.5 sm:space-y-4 2xl:space-y-6;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wb-container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .wb-container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wb-container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .wb-container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wb-container {
+    max-width: 1440px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .wb-container {
+    max-width: 1720px;
+  }
+}
+
+/* ==========================================================================
+   HEADER / NAVBAR STYLES
+   ========================================================================== */
+
+.wb-header {
+  @apply rounded-[16px] 2xl:rounded-[20px] bg-gradient-to-r from-[#DDD9F7] via-[#E8E6F5] to-[#E5E5EA] px-3.5 py-2 sm:px-4.5 sm:py-2.5 2xl:px-6 2xl:py-2.5 shadow-[0_4px_20px_-4px_rgba(98,25,189,0.08)] border border-white/80 flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 2xl:gap-5;
+}
+
+.wb-header-logo-text {
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.08em;
+  text-shadow: 1px 1px 0px rgba(98, 25, 189, 0.25);
+  @apply text-lg sm:text-xl 2xl:text-2xl font-bold tracking-wider text-[#6219BD];
+}
+
+.wb-header-btn-primary {
+  @apply bg-[#673DE6] hover:bg-[#5B21B6] text-white text-xs 2xl:text-[13px] font-medium px-4 py-1.5 sm:px-5 sm:py-2 2xl:px-6 2xl:py-2.5 rounded-[10px] 2xl:rounded-[12px] shadow-sm transition-all cursor-pointer active:scale-95;
+}
+
+.wb-header-btn-secondary {
+  @apply bg-[#1F1F23] hover:bg-[#27272F] text-white text-xs 2xl:text-[13px] font-medium px-4 py-1.5 sm:px-5 sm:py-2 2xl:px-6 2xl:py-2.5 rounded-[10px] 2xl:rounded-[12px] shadow-sm transition-all cursor-pointer active:scale-95;
+}
+
+.wb-search-input {
+  @apply w-full bg-[#F8F8FA] hover:bg-white focus:bg-white text-xs 2xl:text-[13px] text-zinc-800 placeholder-zinc-400 pl-9 2xl:pl-10 pr-8 py-2 2xl:py-2.5 rounded-full border border-zinc-200/80 focus:outline-none focus:ring-2 focus:ring-[#6219BD]/30 transition-all shadow-inner;
+}
+
+/* ==========================================================================
+   SIGNATURE NOTCHED SECTION CONTAINER
+   ========================================================================== */
+
+.wb-notched-container {
+  @apply relative rounded-[18px] sm:rounded-[22px] 2xl:rounded-[26px] shadow-sm transition-all duration-300 h-full flex flex-col justify-between;
+}
+
+.wb-notched-cutout {
+  @apply absolute top-0 right-0 pl-2 pb-2 sm:pl-2.5 sm:pb-2.5 2xl:pl-3.5 2xl:pb-3.5 rounded-bl-[16px] sm:rounded-bl-[18px] 2xl:rounded-bl-[22px] z-20 flex items-start justify-end;
+}
+
+.wb-notched-action-btn {
+  @apply bg-[#141418] hover:bg-[#272730] active:scale-[0.98] text-white font-medium rounded-[10px] sm:rounded-[11px] 2xl:rounded-[13px] flex items-center gap-1 2xl:gap-1.5 shadow-sm transition-all cursor-pointer whitespace-nowrap;
+}
+
+.wb-notched-action-btn-compact {
+  @apply text-[10px] 2xl:text-[11px] px-2.5 py-1.5 2xl:px-3.5 2xl:py-2;
+}
+
+.wb-notched-action-btn-normal {
+  @apply text-[11px] 2xl:text-[13px] px-3 py-1.5 sm:px-3.5 sm:py-2 2xl:px-4.5 2xl:py-2.5;
+}
+
+/* ==========================================================================
+   ACCESS POLICY BADGES
+   ========================================================================== */
+
+.wb-badge-free {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/30;
+}
+
+.wb-badge-purchase-dark {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase bg-amber-400/20 text-amber-200 border border-amber-300/30;
+}
+
+.wb-badge-purchase-light {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase bg-purple-100 text-purple-800 border border-purple-300;
+}
+
+.wb-badge-enrolled-dark {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase bg-sky-400/20 text-sky-200 border border-sky-300/30;
+}
+
+.wb-badge-enrolled-light {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 2xl:px-2.5 2xl:py-0.5 rounded-full text-[10px] 2xl:text-[11px] font-semibold tracking-wide uppercase bg-indigo-100 text-indigo-800 border border-indigo-200;
+}
+
+/* ==========================================================================
+   CAROUSEL COVERFLOW STAGE
+   ========================================================================== */
+
+.wb-carousel-preview-card {
+  @apply hidden md:flex flex-col justify-between w-[27%] h-[135px] xl:h-[155px] 2xl:h-[180px] rounded-[12px] 2xl:rounded-[16px] overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.01] select-none shadow-md;
+}
+
+.wb-carousel-spotlight-card {
+  @apply flex-1 max-w-full md:max-w-[430px] xl:max-w-[520px] 2xl:max-w-[620px] h-[175px] xl:h-[200px] 2xl:h-[235px] rounded-[14px] 2xl:rounded-[18px] overflow-hidden cursor-pointer transition-all duration-300 shadow-xl relative;
+}
+
+/* ==========================================================================
+   BENTO GRID (40% Videos / 40% Books / 20% Exams)
+   ========================================================================== */
+
+.wb-bento-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-3.5 2xl:gap-5 items-stretch;
+}
+
+.wb-bento-video-col {
+  @apply md:col-span-1 lg:col-span-4 flex flex-col;
+}
+
+.wb-bento-book-col {
+  @apply md:col-span-1 lg:col-span-4 flex flex-col;
+}
+
+.wb-bento-exam-col {
+  @apply md:col-span-2 lg:col-span-2 flex flex-col;
+}
+
+/* ==========================================================================
+   MEDIA & INSTITUTION CARDS
+   ========================================================================== */
+
+.wb-video-card {
+  @apply bg-[#181722] hover:bg-[#232131] text-white rounded-[12px] 2xl:rounded-[15px] p-2.5 2xl:p-3 flex items-center gap-3 sm:gap-3.5 2xl:gap-4 shadow-xs transition-all cursor-pointer min-h-[64px] sm:h-[68px] xl:h-[78px] 2xl:h-[88px];
+}
+
+.wb-book-card {
+  @apply bg-white/95 hover:bg-white rounded-[12px] 2xl:rounded-[15px] p-2.5 2xl:p-3 flex items-center gap-3 sm:gap-3.5 2xl:gap-4 shadow-xs hover:shadow border border-stone-200/80 hover:border-[#6219BD]/40 transition-all cursor-pointer min-h-[64px] sm:h-[68px] xl:h-[78px] 2xl:h-[88px];
+}
+
+.wb-exam-card {
+  @apply bg-gradient-to-r from-white via-[#F9F8FF] to-white rounded-[11px] 2xl:rounded-[14px] px-2.5 py-2 2xl:px-3 2xl:py-2.5 flex flex-col justify-between shadow-xs border border-white/90 min-h-[64px] sm:h-[68px] xl:h-[78px] 2xl:h-[88px];
+}
+
+.wb-institution-spotlight {
+  @apply bg-[#1D1B26] text-white rounded-[16px] 2xl:rounded-[20px] p-4 sm:p-5 2xl:p-6 flex flex-col justify-between shadow-sm;
+}
+
+.wb-institution-item {
+  @apply bg-[#1D1B26] hover:bg-[#252331] text-white rounded-[14px] 2xl:rounded-[18px] p-3 sm:p-3.5 2xl:p-4 px-3 sm:px-4 2xl:px-5 flex items-center gap-3 sm:gap-3.5 2xl:gap-4.5 cursor-pointer transition-all shadow-sm flex-1;
+}
+
+/* ==========================================================================
+   FOOTER STYLES
+   ========================================================================== */
+
+.wb-footer {
+  @apply rounded-[18px] sm:rounded-[22px] 2xl:rounded-[26px] bg-[#141418] text-white border border-white/10 p-5 sm:p-8 2xl:p-10 shadow-lg mt-8 2xl:mt-12;
+}
+
+.wb-footer-link {
+  @apply text-zinc-400 hover:text-purple-300 transition-colors text-xs 2xl:text-sm;
+}
+
+.wb-footer-heading {
+  @apply text-xs 2xl:text-sm font-semibold uppercase tracking-wider text-purple-200 mb-3;
+}
+
+/* ==========================================================================
+   FLOATING TOOLBAR & MODAL
+   ========================================================================== */
+
+.wb-floating-toolbar {
+  @apply fixed bottom-3 right-3 sm:bottom-4 sm:right-4 2xl:bottom-6 2xl:right-6 z-50 flex flex-wrap items-center gap-1.5 sm:gap-2 bg-[#18181C]/95 backdrop-blur-md text-white p-1.5 sm:p-2 2xl:p-2.5 rounded-2xl shadow-2xl border border-white/15 text-xs 2xl:text-sm;
+}
+
+.wb-modal-backdrop {
+  @apply fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4;
+}
+
+.wb-modal-card {
+  @apply bg-white rounded-2xl max-w-lg 2xl:max-w-2xl w-full p-4 sm:p-6 2xl:p-8 shadow-2xl border border-purple-100 space-y-4;
 }
