@@ -1,4 +1,4 @@
-// Contract types bound to Resources_API.md
+// Contract types bound to Resources_API.md and FRONTEND_DESIGN_DOCUMENT.md
 
 export type AccessPolicy = 'FREE' | 'OWNER_ONLY' | 'ENROLLED' | 'PURCHASE';
 
@@ -8,6 +8,8 @@ export interface MaterialMetadata {
   author?: string;
   tags?: string[];
   externalLink?: string;
+  publishedAt?: string;
+  readingTimeMinutes?: number;
 }
 
 export interface BaseMaterial {
@@ -29,6 +31,17 @@ export interface BaseMaterial {
   metadata?: MaterialMetadata | null;
 }
 
+export interface CollectionCurriculumItem {
+  id: string;
+  resourceId: string;
+  title: string;
+  type: 'VIDEO' | 'PDF';
+  duration?: string;
+  pages?: string;
+  position: number;
+  isCompleted?: boolean;
+}
+
 export interface CollectionItem extends BaseMaterial {
   kind: 'COLLECTION';
   itemCount: number;
@@ -36,6 +49,7 @@ export interface CollectionItem extends BaseMaterial {
   accent: string;
   badgeText: string;
   metadata: MaterialMetadata;
+  items?: CollectionCurriculumItem[];
 }
 
 export interface VideoItem extends BaseMaterial {
@@ -46,6 +60,7 @@ export interface VideoItem extends BaseMaterial {
   views: string;
   gradient: string;
   metadata: MaterialMetadata;
+  videoUrl?: string;
 }
 
 export interface BookItem extends BaseMaterial {
@@ -56,6 +71,29 @@ export interface BookItem extends BaseMaterial {
   spineColor: string;
   coverTint: string;
   metadata: MaterialMetadata;
+  pdfUrl?: string;
+}
+
+export interface ArticleItem {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  author: {
+    id: string;
+    name: string;
+    role: string;
+    avatarUrl?: string;
+  };
+  category: string;
+  tags: string[];
+  accessPolicy: AccessPolicy;
+  hasPin: boolean;
+  publishedAt: string;
+  readTime: string;
+  likes: number;
+  views: number;
 }
 
 export type MaterialItem = CollectionItem | VideoItem | BookItem;

@@ -3,3 +3,4 @@ export * from './Footer';
 export * from './NotchedSectionContainer';
 export * from './AccessPolicyBadge';
 export * from './Modal';
+export * from './AppProviders';

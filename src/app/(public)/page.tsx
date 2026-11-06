@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { MaterialItem } from '@/types';
 import { usePublicSearch } from '@/hooks';
 import {
@@ -20,6 +21,8 @@ import {
 } from '@/components/landing-page';
 
 export default function LandingPage() {
+  const router = useRouter();
+
   // UI Modes: 'rich' (populated educational UI) vs 'wireframe' (clean geometric blocks)
   const [viewMode, setViewMode] = useState<'rich' | 'wireframe'>('rich');
   const [showSymmetryGrid, setShowSymmetryGrid] = useState(false);
@@ -82,6 +85,8 @@ export default function LandingPage() {
         showSymmetryGrid={showSymmetryGrid}
         onSelectVideo={setSelectedMaterial}
         onSelectBook={setSelectedMaterial}
+        onVisitGym={() => router.push('/exams')}
+        onRegisterExam={(exam) => router.push(`/exams/${exam.id}/live`)}
       />
 
       {/* Tier 4: Top Institutions Showcase */}
@@ -89,6 +94,8 @@ export default function LandingPage() {
         institutions={TOP_INSTITUTIONS}
         activeIdx={activeInstitutionIdx}
         setActiveIdx={setActiveInstitutionIdx}
+        onExplore={() => router.push('/institutions')}
+        onVisit={(inst) => router.push(`/institutions/${inst.id}`)}
       />
 
       {/* Floating Design Controls Toolbar */}
