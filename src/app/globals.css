@@ -25,6 +25,94 @@ body {
   min-height: 100vh;
 }
 
+/* Shared rich text styling keeps the editor canvas and article reader aligned. */
+.article-rich-content p {
+  margin: 0.5rem 0;
+}
+
+.article-rich-content h1,
+.article-rich-content h2,
+.article-rich-content h3,
+.article-rich-content h4 {
+  color: inherit;
+  line-height: 1.25;
+}
+
+.article-rich-content h1 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.875rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.article-rich-content h2 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.article-rich-content h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.article-rich-content h4 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.article-rich-content ul,
+.article-rich-content ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.article-rich-content ul {
+  list-style: disc;
+}
+
+.article-rich-content ol {
+  list-style: decimal;
+}
+
+.article-rich-content blockquote {
+  margin: 1rem 0;
+  border-left: 4px solid #6219bd;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: rgb(98 25 189 / 0.04);
+  padding: 0.5rem 1rem;
+  font-style: italic;
+}
+
+.article-rich-content code {
+  border-radius: 0.25rem;
+  background: #f4f4f5;
+  padding: 0.125rem 0.25rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.9em;
+}
+
+@media (min-width: 640px) {
+  .article-rich-content h1 {
+    font-size: 2.25rem;
+  }
+
+  .article-rich-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .article-rich-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .article-rich-content h4 {
+    font-size: 1.125rem;
+  }
+}
+
 /* ==========================================================================
    RESPONSIVE LAYOUT & CONTAINER STYLES (Mobile, Tablet, Laptop, Desktop PC)
    ========================================================================== */

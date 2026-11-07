@@ -55,7 +55,14 @@ export const ENDPOINTS = {
   ARTICLES: {
     LIST: `${API_BASE_URL}/articles`,
     DETAIL: (id: string) => `${API_BASE_URL}/articles/${id}`,
+    CREATE: `${API_BASE_URL}/articles`,
+    UPDATE: (id: string) => `${API_BASE_URL}/articles/${id}`,
+    SUBMIT_FOR_REVIEW: (id: string) => `${API_BASE_URL}/articles/${id}/submit-for-review`,
+    ME: `${API_BASE_URL}/articles/me`,
     UNLOCK: (id: string) => `${API_BASE_URL}/articles/${id}/unlock`,
+    ADMIN_PENDING: `${API_BASE_URL}/global-admin/articles/pending`,
+    ADMIN_INSPECT: (id: string) => `${API_BASE_URL}/global-admin/articles/${id}`,
+    ADMIN_RESPOND: (id: string) => `${API_BASE_URL}/global-admin/articles/${id}/respond`,
   },
   PAYMENTS: {
     INIT: `${API_BASE_URL}/payments`,

@@ -3,3 +3,4 @@ export * from './auth.types';
 export * from './material.types';
 export * from './institution.types';
 export * from './exam.types';
+export * from './article.types';

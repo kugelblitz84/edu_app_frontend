@@ -12,7 +12,8 @@ import {
   LogOut,
   Menu,
   X,
-  Compass
+  Compass,
+  Newspaper
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -20,6 +21,7 @@ const APP_SIDEBAR_LINKS = [
   { href: '/me/profile', label: 'My Profile', icon: User },
   { href: '/me/library', label: 'My Library & Drafts', icon: BookOpen },
   { href: '/me/exams', label: 'My Exam History', icon: GraduationCap },
+  { href: '/studio/articles/new', label: 'Article Builder', icon: Newspaper },
   { href: '/studio/new-resource', label: 'Create Resource', icon: PlusCircle },
   { href: '/studio/new-collection', label: 'Collection Builder', icon: Layers }
 ];
