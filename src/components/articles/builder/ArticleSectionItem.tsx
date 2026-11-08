@@ -87,7 +87,12 @@ export const ArticleSectionItem: React.FC<ArticleSectionItemProps> = ({
       {/* Section Container Card */}
       <section
         ref={containerRef}
-        onClick={() => setActiveSelection(section.id)}
+        onClick={(event) => {
+          if (event.target instanceof Element && event.target.closest('[data-article-block]')) {
+            return;
+          }
+          setActiveSelection(section.id);
+        }}
         style={{
           backgroundColor: style.backgroundColor || undefined,
           borderColor: style.borderColor || undefined,

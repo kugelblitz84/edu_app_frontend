@@ -106,7 +106,9 @@ export const TextBlockEditor: React.FC<TextBlockEditorProps> = ({
       setActiveEditor(editor, block.id);
     },
     onSelectionUpdate: ({ editor }) => {
-      if (useArticleEditorStore.getState().activeBlockId !== block.id) {
+      const { activeBlockId, activeEditor } = useArticleEditorStore.getState();
+      if (activeEditor !== editor || activeBlockId !== block.id) {
+        if (!editor.isFocused) return;
         setActiveSelection(sectionId, columnId, block.id);
         setActiveEditor(editor, block.id);
       } else {
@@ -114,7 +116,9 @@ export const TextBlockEditor: React.FC<TextBlockEditorProps> = ({
       }
     },
     onTransaction: ({ editor }) => {
-      updateActiveFormatting(editor);
+      if (useArticleEditorStore.getState().activeEditor === editor) {
+        updateActiveFormatting(editor);
+      }
     },
     onUpdate: ({ editor }) => {
       const currentBlock = blockRef.current;

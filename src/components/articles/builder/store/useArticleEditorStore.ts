@@ -127,7 +127,6 @@ interface ArticleEditorState {
   // Active Editor registration
   setActiveEditor: (editor: Editor | null, blockId?: string) => void;
   updateActiveFormatting: (providedEditor?: Editor | null) => void;
-  convertBlockStyle: (level: 0 | 1 | 2 | 3 | 4 | 'quote') => void;
   setSpecialBlockFormatting: (type: 'quote') => void;
   setActiveSelection: (sectionId: string | null, columnId?: string | null, blockId?: string | null) => void;
 
@@ -419,7 +418,10 @@ export const useArticleEditorStore = create<ArticleEditorState>((set, get) => ({
   },
 
   updateActiveFormatting: (providedEditor) => {
-    const editor = providedEditor ?? get().activeEditor;
+    const activeEditor = get().activeEditor;
+    if (providedEditor && providedEditor !== activeEditor) return;
+
+    const editor = providedEditor ?? activeEditor;
     if (!editor || editor.isDestroyed) {
       set({ activeFormatting: DEFAULT_FORMATTING });
       return;
@@ -433,17 +435,16 @@ export const useArticleEditorStore = create<ArticleEditorState>((set, get) => ({
     let isBlockquote = false;
     let isMixedTextStyle = false;
 
-    // Check if current cursor position or selection has blockquote ancestor
-    for (let depth = $from.depth; depth > 0; depth--) {
-      if ($from.node(depth).type.name === 'blockquote') {
-        isBlockquote = true;
-        break;
+    const hasBlockquoteAncestor = (position: number) => {
+      const $position = state.doc.resolve(position);
+      for (let depth = $position.depth; depth > 0; depth--) {
+        if ($position.node(depth).type.name === 'blockquote') return true;
       }
-    }
+      return false;
+    };
 
     if (selection.empty) {
-      // CURSOR PLACED ON A LINE OF TEXT
-      // Inspect the block node enclosing the cursor point
+      isBlockquote = hasBlockquoteAncestor($from.pos);
       let foundBlock = false;
       for (let depth = $from.depth; depth >= 0; depth--) {
         const node = $from.node(depth);
@@ -469,38 +470,35 @@ export const useArticleEditorStore = create<ArticleEditorState>((set, get) => ({
       // SELECTION SPANS A RANGE OF TEXT
       const stylesInSelection = new Set<string>();
 
-      state.doc.nodesBetween(selection.from, selection.to, (node) => {
+      state.doc.nodesBetween(selection.from, selection.to, (node, position) => {
         if (node.isTextblock) {
-          if (node.type.name === 'heading') {
+          const isQuote = hasBlockquoteAncestor(Math.min(position + 1, state.doc.content.size));
+          if (isQuote) {
+            stylesInSelection.add('quote');
+          } else if (node.type.name === 'heading') {
             stylesInSelection.add(`h${node.attrs.level}`);
           } else if (node.type.name === 'paragraph') {
             stylesInSelection.add('p');
           }
         }
-        if (node.type.name === 'blockquote') {
-          isBlockquote = true;
-        }
       });
 
       if (stylesInSelection.size > 1) {
         isMixedTextStyle = true;
-      } else if (stylesInSelection.size === 1) {
+      }
+      isBlockquote = stylesInSelection.has('quote');
+
+      if (stylesInSelection.size === 1) {
         const onlyStyle = Array.from(stylesInSelection)[0];
         if (onlyStyle.startsWith('h')) {
           headingLevel = parseInt(onlyStyle.substring(1), 10) as 1 | 2 | 3 | 4;
-        } else {
-          headingLevel = 0;
         }
-      } else {
+      } else if (stylesInSelection.size === 0) {
         if (editor.isActive('heading', { level: 1 })) headingLevel = 1;
         else if (editor.isActive('heading', { level: 2 })) headingLevel = 2;
         else if (editor.isActive('heading', { level: 3 })) headingLevel = 3;
         else if (editor.isActive('heading', { level: 4 })) headingLevel = 4;
       }
-    }
-
-    if (editor.isActive('blockquote')) {
-      isBlockquote = true;
     }
 
     let textAlign: 'left' | 'center' | 'right' | 'justify' = 'left';
@@ -534,106 +532,6 @@ export const useArticleEditorStore = create<ArticleEditorState>((set, get) => ({
         isBlockquote: type === 'quote',
       },
     });
-  },
-
-  convertBlockStyle: (level: 0 | 1 | 2 | 3 | 4 | 'quote') => {
-    const state = get();
-    let targetSectionId = state.activeSectionId;
-    let targetColumnId = state.activeColumnId;
-    let targetBlockId = state.activeBlockId;
-
-    if (!targetBlockId) {
-      const section = state.sections.find((s) => s.id === targetSectionId) || state.sections[0];
-      if (section && section.columns && section.columns.length > 0) {
-        for (const col of section.columns) {
-          const firstBlock = col.blocks.find(
-            (b) => b.type === 'PARAGRAPH' || b.type === 'HEADING' || b.type === 'QUOTE'
-          );
-          if (firstBlock) {
-            targetSectionId = section.id;
-            targetColumnId = col.id;
-            targetBlockId = firstBlock.id;
-            break;
-          }
-        }
-      }
-    }
-
-    if (!targetSectionId || !targetColumnId || !targetBlockId) return;
-
-    set((s) => ({
-      sections: s.sections.map((sec) => {
-        if (sec.id !== targetSectionId || !sec.columns) return sec;
-        return {
-          ...sec,
-          columns: sec.columns.map((col) => {
-            if (col.id !== targetColumnId) return col;
-            return {
-              ...col,
-              blocks: col.blocks.map((blk) => {
-                if (blk.id !== targetBlockId) return blk;
-
-                if (level === 'quote') {
-                  const text =
-                    'text' in blk
-                      ? blk.text
-                      : 'html' in blk
-                      ? blk.html.replace(/<[^>]*>/g, '')
-                      : '';
-                  return {
-                    id: blk.id,
-                    type: 'QUOTE',
-                    text,
-                    style: 'highlight',
-                  };
-                } else if (level === 0) {
-                  const html =
-                    'html' in blk
-                      ? blk.html
-                      : 'text' in blk
-                      ? `<p>${blk.text}</p>`
-                      : '<p></p>';
-                  return {
-                    id: blk.id,
-                    type: 'PARAGRAPH',
-                    html: html.startsWith('<h')
-                      ? `<p>${html.replace(/<[^>]*>/g, '')}</p>`
-                      : html,
-                    fontSize: 'base',
-                    align: 'align' in blk ? blk.align : 'left',
-                  };
-                } else {
-                  const rawText =
-                    'text' in blk
-                      ? blk.text
-                      : 'html' in blk
-                      ? blk.html.replace(/<[^>]*>/g, '')
-                      : '';
-                  return {
-                    id: blk.id,
-                    type: 'HEADING',
-                    level,
-                    text: rawText,
-                    align: 'align' in blk ? blk.align : 'left',
-                  };
-                }
-              }),
-            };
-          }),
-        };
-      }),
-      activeSectionId: targetSectionId,
-      activeColumnId: targetColumnId,
-      activeBlockId: targetBlockId,
-      activeFormatting: {
-        ...state.activeFormatting,
-        headingLevel: level === 'quote' ? 0 : level,
-        isBlockquote: level === 'quote',
-        isMixedTextStyle: false,
-      },
-    }));
-
-    get().persistLocal();
   },
 
   setActiveSelection: (sectionId, columnId = null, blockId = null) => {

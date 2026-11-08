@@ -77,7 +77,6 @@ export const ArticleGlobalToolbar: React.FC = () => {
     activeSectionId,
     sections,
     setSectionLayout,
-    convertBlockStyle,
   } = useArticleEditorStore();
   const [showStyleMenu, setShowStyleMenu] = useState(false);
   const [showMoreMenu, setShowMoreMenu] = useState(false);
@@ -115,30 +114,22 @@ export const ArticleGlobalToolbar: React.FC = () => {
   };
 
   const setTextStyle = (level: 0 | 1 | 2 | 3 | 4 | 'quote') => {
-    if (activeEditor && !activeEditor.isDestroyed) {
-      run((editor) => {
-        if (level === 'quote') {
-          if (activeFormatting.isBlockquote) {
-            editor.chain().focus().lift('blockquote').run();
-          } else {
-            editor.chain().focus().setBlockquote().run();
-          }
-        } else if (level === 0) {
-          let chain = editor.chain().focus();
-          if (activeFormatting.isBlockquote) chain = chain.lift('blockquote');
-          chain.setParagraph().run();
-        } else {
-          if (activeFormatting.headingLevel === level && !activeFormatting.isBlockquote) {
-            editor.chain().focus().setParagraph().run();
-          } else {
-            let chain = editor.chain().focus();
-            if (activeFormatting.isBlockquote) chain = chain.lift('blockquote');
-            chain.setHeading({ level }).run();
-          }
-        }
-      });
+    if (!hasEditor || !activeEditor) return;
+
+    const chain = activeEditor.chain().focus();
+    if (level === 'quote') {
+      if (!activeFormatting.isBlockquote || activeFormatting.isMixedTextStyle) {
+        chain.setBlockquote().run();
+      }
     } else {
-      convertBlockStyle(level);
+      const textChain = activeFormatting.isBlockquote ? chain.lift('blockquote') : chain;
+      if (level === 0) {
+        textChain.setParagraph().run();
+      } else {
+        // Applying the current style again is intentionally a no-op in effect,
+        // as in Docs; it must never toggle a heading back to body text.
+        textChain.setHeading({ level }).run();
+      }
     }
     setShowStyleMenu(false);
   };
@@ -205,17 +196,22 @@ export const ArticleGlobalToolbar: React.FC = () => {
         <div className="relative">
           <button
             type="button"
+            disabled={!hasEditor}
             onMouseDown={(event) => event.preventDefault()}
-            aria-label={`Text style: ${styleLabel}. Follows the current selection`}
+            aria-label={
+              hasEditor
+                ? `Text style: ${styleLabel}. Follows the current selection`
+                : `Text style: ${styleLabel}. Select editable text to change its style`
+            }
             aria-expanded={showStyleMenu}
-            title={hasEditor ? `Text style at cursor: ${styleLabel}` : `Text style: ${styleLabel}`}
+            title={hasEditor ? `Text style at cursor: ${styleLabel}` : 'Select editable text to change style'}
             onClick={() => setShowStyleMenu((open) => !open)}
-            className="flex min-h-9 min-w-32 items-center justify-between gap-2 rounded-lg border border-zinc-200 bg-white px-3 font-semibold text-zinc-800 transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 cursor-pointer"
+            className="flex min-h-9 min-w-32 cursor-pointer items-center justify-between gap-2 rounded-lg border border-zinc-200 bg-white px-3 font-semibold text-zinc-800 transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white"
           >
             <span className="truncate">{styleLabel}</span>
             <ChevronDown className="h-3.5 w-3.5 shrink-0 text-zinc-400" />
           </button>
-          {showStyleMenu && (
+          {showStyleMenu && hasEditor && (
             <div className="absolute left-0 top-full z-50 mt-2 w-52 rounded-xl border border-zinc-200 bg-white p-1.5 shadow-xl">
               <p className="px-2 py-1.5 text-xs font-semibold text-zinc-500">Text style</p>
               {([
@@ -228,8 +224,10 @@ export const ArticleGlobalToolbar: React.FC = () => {
               ] as const).map(([level, label]) => {
                 const selected =
                   level === 'quote'
-                    ? activeFormatting.isBlockquote
-                    : !activeFormatting.isBlockquote && activeFormatting.headingLevel === level;
+                    ? activeFormatting.isBlockquote && !activeFormatting.isMixedTextStyle
+                    : !activeFormatting.isBlockquote &&
+                      !activeFormatting.isMixedTextStyle &&
+                      activeFormatting.headingLevel === level;
                 return (
                   <button
                     key={label}
@@ -381,7 +379,7 @@ export const ArticleGlobalToolbar: React.FC = () => {
                     <RemoveFormatting className="h-4 w-4" />
                     Clear formatting
                   </button>
-                  {activeFormatting.isBlockquote && (
+                  {activeFormatting.isBlockquote && !activeFormatting.isMixedTextStyle && (
                     <button
                       type="button"
                       onMouseDown={(event) => event.preventDefault()}
@@ -398,7 +396,7 @@ export const ArticleGlobalToolbar: React.FC = () => {
           )}
         </div>
         <p className="hidden pl-1 text-xs text-zinc-500 lg:block">
-          {hasEditor ? 'Formatting follows the cursor or selection' : 'Select text to format'}
+          {hasEditor ? 'Formatting follows the cursor or selection' : 'Select editable text to format'}
         </p>
       </div>
 
